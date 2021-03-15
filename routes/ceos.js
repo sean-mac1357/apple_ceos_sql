@@ -6,15 +6,7 @@ const express = require('express'),
 router.get('/', async (req, res) => {
     const ceosData = await ceoModel.getAll();
 
-    res.render('template', {
-        locals: {
-            title: 'List of Apple CEOs',
-            data: ceosData
-        },
-        partials: {
-            body: 'partials/ceo-list',
-        },
-    });
+    res.json(ceosData).status(200);
 });
 
 router.get('/:slug', async (req, res) => {
@@ -22,15 +14,7 @@ router.get('/:slug', async (req, res) => {
     const executive = await ceoModel.getBySlug(slug);
     
     if (executive) {
-        res.render('template', {
-            locals: {
-                title: `${executive.name}'s info`,
-                executive,
-            },
-            partials: {
-                body: 'partials/ceo-details',
-            },
-        });
+        res.json(executive).status(200);
     } else {
         res.status(404).send(`No CEO with the slug of ${slug}. Sorry 😢`)
     }
