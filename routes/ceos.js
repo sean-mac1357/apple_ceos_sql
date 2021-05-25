@@ -22,6 +22,7 @@ router.get('/:slug', async (req, res) => {
 
 router.post('/', async (req, res) => {
     const { ceo_name, ceo_year} = req.body;
+    console.log("reqBody:", req.body)
     const slug = slugify(ceo_name, {
         replacement: '_',
         lower: true,
